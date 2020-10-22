@@ -662,3 +662,26 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+// Register Preload Location Post Type
+function user_post_type() {
+	// register_post_type()
+	// first argument is the name of post type
+	// second argument is an array that describes your post type
+	register_post_type('sub_user', array(
+		// associative array
+		// 'show_in_rest' => true, // lets you use the modern editor
+		'supports' => array('title', 'editor', 'excerpt'), // if 'editor' does not exist it reverts edit to classic editor look.
+    'has_archive' => true, // set up an archive url
+		'public' => true, // make the post type visible to editors and viewers of the website
+		'labels' => array(
+			'name' => 'Subscriber Users',
+      'add_new_item' => 'Add New User',
+      'edit_item' => 'Edit User',
+      'all_items' => 'All Users',
+      'singular_name' => 'User'
+		),
+		'menu_icon' => 'dashicons-location'
+	));
+}
+add_action('init', 'user_post_type');
